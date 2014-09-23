@@ -11,7 +11,7 @@
         google.setOnLoadCallback(drawMap);
     
         function drawMap() {
-          var data = google.visualization.Query(https://docs.google.com/spreadsheets/d/1TyznJnhk1lDg8msI8oQzSrY8oZpySyh6kCmnlQMGuAc/edit#gid=0);
+          var data = google.visualization.Query("https://docs.google.com/spreadsheets/d/1TyznJnhk1lDg8msI8oQzSrY8oZpySyh6kCmnlQMGuAc/edit#gid=0");
     
         var options = { showTip: true };
     
