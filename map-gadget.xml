@@ -1,8 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Module>
+
   <ModulePrefs title="map-gadget" height="250" scaling="false" />
-  <Content type="html">
-  <![CDATA[
+  <UserPref name="_table_query_url" display_name="Data source url" required="true"/>
+  <UserPref name="_table_query_refresh_interval" display_name="Data refresh interval (minutes)"
+    default_value="0" datatype="enum" required="false">
+    <EnumValue value="0" display_value="Do not refresh"/>
+
+    <EnumValue value="60" display_value="1"/>
+    <EnumValue value="300" display_value="5"/>
+    <EnumValue value="1800" display_value="30"/>
+  </UserPref>
+
+  <Content type="html"><![CDATA[
     <html>
       <head>
       <script type="text/javascript" src="https://www.google.com/jsapi"/></script>
