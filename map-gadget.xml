@@ -1,6 +1,5 @@
 <html>
   <head>
-    <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
     
@@ -41,7 +40,6 @@
   </head>
 
   <body>
-<!--Div that will hold the pie chart-->
     <div id="chart_div" style="width:400; height:300"></div>
 
   </body>
