@@ -20,7 +20,7 @@
         google.load('visualization', '1', { 'packages': ['map'] });
         google.setOnLoadCallback(drawMap);
         
-        function drawChart() {
+        function drawMap() {
           var data = google.visualization.arrayToDataTable([
             ['Lat', 'Long', 'Name'],
             [37.4232, -122.0853, 'Work'],
