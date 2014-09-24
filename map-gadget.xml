@@ -1,46 +1,116 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?> 
 <Module>
-
-  <ModulePrefs title="map-gadget" height="250" scaling="false" />
-  <UserPref name="_table_query_url" display_name="Data source url" required="true"/>
-  <UserPref name="_table_query_refresh_interval" display_name="Data refresh interval (minutes)"
-    default_value="0" datatype="enum" required="false">
-    <EnumValue value="0" display_value="Do not refresh"/>
-
-    <EnumValue value="60" display_value="1"/>
-    <EnumValue value="300" display_value="5"/>
-    <EnumValue value="1800" display_value="30"/>
+  <ModulePrefs
+    title="Debug Example"
+    height="200"/>
+  <UserPref
+    name="myname"
+    display_name="Name"
+    required="true" />
+  <UserPref
+    name="mycolor"
+    display_name="Color"
+    default_value="Pink"
+    datatype="enum" >   
+      <EnumValue value="Blue" />
+      <EnumValue value="Yellow" />
+      <EnumValue value="Pink" />
+      <EnumValue value="Gray" />
   </UserPref>
+  <Content type="html"> 
+  <![CDATA[ 
+    <div id="content_div" style="font-size:20pt; padding:5px; text-align: center;"></div>
+    <div id="debug_div" style="font-size:9pt; padding:5px; color: red;"></div>
 
-  <Content type="html"><![CDATA[
-    <html>
-      <head>
-      <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-      <script type="text/javascript">
-        google.load('visualization', '1', { 'packages': ['map'] });
-        google.setOnLoadCallback(drawMap);
-        
-        function drawMap() {
-          gadgetHelper = new google.visualization.GadgetHelper();
-          var query = gadgetHelper.createQueryFromPrefs(prefs);
-          query.send(handleQueryResponse);
-        };
-        
-        function handleQueryResponse(response) {
-          if (!gadgetHelper.validateResponse(response)) {
-            return;
-          };
-          var data = response.getDataTable();
-          var options = { showTip: true };
-          var map = new google.visualization.Map(document.getElementById("chart_div"));
-          map.draw(data, options);
-        };
-      </script>
-      </head>
-      <body>
-        <div id="chart_div"></div>
-      </body>
-    </html>
-  ]]>
+    <script type="text/javascript">
+      // Get userprefs
+      var prefs = new gadgets.Prefs();
+
+      // debug flag. When its value is non-zero, debugging messages are displayed
+      var debug = 1;
+      // The string containing debugging messages
+      var debug_html = "";
+
+      // Display date
+      function displayDate (){
+        // DEBUG: is the function getting called?
+        print("In displayDate function<br>");
+          
+        // Create Date object
+        var today = new Date();
+        // Get current time
+        var time = today.getTime();
+        var content_html = "";     
+        var element = document.getElementById('content_div');
+        element.style.backgroundColor=prefs.getString("mycolor");
+        element.style.height=100;
+
+        // DEBUG: print out prefs values
+        print("The background color is " + prefs.getString("mycolor") + "<br>");
+        print("The name is " + prefs.getString("myname") + "<br>");
+      
+        content_html += today.toDateString();
+        // Write content HTML to div
+        document.getElementById("content_div").innerHTML = content_html;    
+      }
+  
+      // Outputs debug messages if debug flag has a non-zero value
+      function print(msg) {      
+        if (debug) {
+          debug_html += msg;
+          // Write debug HTML to div
+          document.getElementById("debug_div").innerHTML = debug_html;
+        }
+      }
+      gadgets.util.registerOnLoadHandler(displayDate);
+    </script>
+  ]]> 
   </Content>
 </Module>
+
+//<?xml version="1.0" encoding="UTF-8"?>
+//<Module>
+//
+//  <ModulePrefs title="map-gadget" height="250" scaling="false" />
+//  <UserPref name="_table_query_url" display_name="Data source url" required="true"/>
+//  <UserPref name="_table_query_refresh_interval" display_name="Data refresh interval (minutes)"
+//    default_value="0" datatype="enum" required="false">
+//    <EnumValue value="0" display_value="Do not refresh"/>
+//
+//    <EnumValue value="60" display_value="1"/>
+//    <EnumValue value="300" display_value="5"/>
+//    <EnumValue value="1800" display_value="30"/>
+//  </UserPref>
+//
+//  <Content type="html"><![CDATA[
+//    <html>
+//      <head>
+//      <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+//      <script type="text/javascript">
+//        google.load('visualization', '1', { 'packages': ['map'] });
+//        google.setOnLoadCallback(drawMap);
+//        
+//        function drawMap() {
+//          gadgetHelper = new google.visualization.GadgetHelper();
+//          var query = gadgetHelper.createQueryFromPrefs(prefs);
+//          query.send(handleQueryResponse);
+//        };
+//        
+//        function handleQueryResponse(response) {
+//          if (!gadgetHelper.validateResponse(response)) {
+//            return;
+//          };
+//          var data = response.getDataTable();
+//          var options = { showTip: true };
+//          var map = new google.visualization.Map(document.getElementById("chart_div"));
+//          map.draw(data, options);
+//        };
+//      </script>
+//      </head>
+//      <body>
+//        <div id="chart_div"></div>
+//      </body>
+//    </html>
+//  ]]>
+//  </Content>
+//</Module>//
