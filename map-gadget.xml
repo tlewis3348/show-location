@@ -34,7 +34,7 @@
     <script type="text/javascript">
       var debug = 1;
       var debug_html = "";
-
+      print("37")
       google.load('visualization', '1', { 'packages': ['map'] });
       google.setOnLoadCallback(drawMap);
       
