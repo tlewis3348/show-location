@@ -44,12 +44,12 @@
         // Use this URL: https://docs.google.com/spreadsheets/d/1TyznJnhk1lDg8msI8oQzSrY8oZpySyh6kCmnlQMGuAc/gviz/tq?range=A1:C1000&gid=0&headers=1
         var query = new google.visualization.Query(prefs.getString("_table_query_url"), {sendMethod: 'auto'});
         query.setRefreshInterval(prefs.getString("_table_query_refresh_interval"));
+        print("47")
         query.send(handleQueryResponse);
-        //var data = query.getDataTable()
       }
       
       function handleQueryResponse(response) {
-      
+        print("52")
         if (response.isError()) {
           alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
           return;
@@ -58,6 +58,7 @@
         var data = response.getDataTable();
         print(data)
         var map = new google.visualization.Map(document.getElementById('chart_div'));
+        print("61")
         map.draw(data, { showTip: true });
       }
       
