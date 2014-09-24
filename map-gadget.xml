@@ -24,16 +24,17 @@
           gadgetHelper = new google.visualization.GadgetHelper();
           var query = gadgetHelper.createQueryFromPrefs(prefs);
           query.send(handleQueryResponse);
-          
-          //var opts = {sendMethod: 'auto'};
-          //var data = new google.visualization.Query("https://docs.google.com/spreadsheets/d/1TyznJnhk1lDg8msI8oQzSrY8oZpySyh6kCmnlQMGuAc/edit#gid=0", opts);
-          //var data = new google.visualization.Query(_table_query_url);
-    
-        var options = { showTip: true };
-    
-        var map = new google.visualization.Map(document.getElementById('chart_div'));
-    
-        map.draw(data, options);
+        };
+        
+        function handleQueryResponse(response) {
+          if (!gadgetHelper.validateResponse(response)) {
+            return;
+          };
+          var data = response.getDataTable();
+          table.draw(data, options);
+          var options = { showTip: true };
+          var map = new google.visualization.Map(document.getElementById('chart_div'));
+          map.draw(data, options);
         };
       </script>
       </head>
