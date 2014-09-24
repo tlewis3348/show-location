@@ -35,8 +35,8 @@
       var debug = 1;
       var debug_html = "";
       google.load('visualization', '1', { 'packages': ['map'] });
-      print("38")
       google.setOnLoadCallback(drawMap);
+      print("39")
       
       function drawMap() {
         var prefs = new gadgets.Prefs();
