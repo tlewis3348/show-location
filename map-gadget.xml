@@ -29,7 +29,7 @@
         //    [37.4422, -122.1731, 'Shopping']
         //  ]);
         //
-        //  var map = new google.visualization.Map(document.getElementById('chart_div'));
+        //  var map = new google.visualization.Map(document.getElementById("chart_div"));
         //  map.draw(data, {showTip: true});
         //}
         
@@ -45,7 +45,7 @@
           };
           var data = response.getDataTable();
           var options = { showTip: true };
-          var map = new google.visualization.Map(document.getElementById('chart_div'));
+          var map = new google.visualization.Map(document.getElementById("chart_div"));
           map.draw(data, options);
         };
       </script>
