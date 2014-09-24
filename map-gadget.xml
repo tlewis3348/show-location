@@ -36,12 +36,12 @@
       var debug_html = "";
       google.load('visualization', '1', { 'packages': ['map'] });
       google.setOnLoadCallback(drawMap);
-      print("39")
       
       function drawMap() {
         var prefs = new gadgets.Prefs();
-
+        
         // Use this URL: https://docs.google.com/spreadsheets/d/1TyznJnhk1lDg8msI8oQzSrY8oZpySyh6kCmnlQMGuAc/gviz/tq?range=A1:C1000&gid=0&headers=1
+        print("44")
         var query = new google.visualization.Query(prefs.getString("_table_query_url"), {sendMethod: 'auto'});
         query.setRefreshInterval(prefs.getString("_table_query_refresh_interval"));
         print("47")
