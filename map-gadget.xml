@@ -27,11 +27,14 @@
 
   <Content type="html">
   <![CDATA[
-    <div id="content_div" style="font-size:20pt; padding:5px; text-align: center;"></div>
+    <div id="chart_div" style="font-size:20pt; padding:5px; text-align: center;"></div>
     <div id="debug_div" style="font-size:9pt; padding:5px; color: red;"></div>
     
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
+      var debug = 1;
+      var debug_html = "";
+
       google.load('visualization', '1', { 'packages': ['map'] });
       google.setOnLoadCallback(drawMap);
       
@@ -45,8 +48,15 @@
         var map = new google.visualization.Map(document.getElementById('chart_div'));
         
         map.draw(query, { showTip: true });
+      }
 
+      function print(msg) {      
+        if (debug) {
+          debug_html += msg;
+          // Write debug HTML to div
+          document.getElementById("debug_div").innerHTML = debug_html;
         }
+      }
     </script>
   ]]>
   </Content>
