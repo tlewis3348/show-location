@@ -41,25 +41,26 @@
         var prefs = new gadgets.Prefs();
         
         // Use this URL: https://docs.google.com/spreadsheets/d/1TyznJnhk1lDg8msI8oQzSrY8oZpySyh6kCmnlQMGuAc/gviz/tq?range=A1:C1000&gid=0&headers=1
-        print("44")
+        print("44");
         var query = new google.visualization.Query(prefs.getString("_table_query_url"), {sendMethod: 'auto'});
         query.setRefreshInterval(prefs.getString("_table_query_refresh_interval"));
-        print("47")
+        print("47");
         query.send(handleQueryResponse);
       }
       
       function handleQueryResponse(response) {
-        print("52")
+        print("52");
         if (response.isError()) {
           alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
           return;
         }
       
         var data = response.getDataTable();
-        print(data)
+        print(data);
         var map = new google.visualization.Map(document.getElementById('chart_div'));
-        print("61")
+        print("61");
         map.draw(data, { showTip: true });
+        gadgets.window.adjustHeight();
       }
       
       function print(msg) {      
