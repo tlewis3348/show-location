@@ -27,7 +27,7 @@
 
   <Content type="html">
   <![CDATA[
-    <div id="chart_div" style="font-size:20pt; padding:5px; text-align: center;"></div>
+    <div id="chart_div"></div>
     <div id="debug_div" style="font-size:9pt; padding:5px; color: red;"></div>
     
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
