@@ -3,7 +3,7 @@
 
   <ModulePrefs
   	title="map-gadget"
-  	height="500"
+  	height="700"
   	scaling="false" />
   <Require feature="dynamic-height"/>
   <UserPref name="_table_query_url"
