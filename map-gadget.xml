@@ -15,8 +15,8 @@
   <Content type="html"><![CDATA[
     <html>
       <head>
-      <script type="text/javascript" src="https://www.google.com/jsapi"/></script>
-      <script>
+      <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+      <script type="text/javascript">
         google.load('visualization', '1', { 'packages': ['map'] });
         google.setOnLoadCallback(drawMap);
         
