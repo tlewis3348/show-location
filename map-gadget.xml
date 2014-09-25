@@ -59,6 +59,7 @@
           enableScrollWheel: true,
           showTip: true,
           showLine: true,
+          lineWidth: 5,
           mapType: 'normal',
           useMapTypeControl: true
           };
