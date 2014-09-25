@@ -2,7 +2,7 @@
 <Module>
 
   <ModulePrefs
-        title="map-gadget"
+        title="sample-gadget"
         height="700"
         scaling="false" />
   <Require feature="dynamic-height"/>
