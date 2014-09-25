@@ -33,7 +33,7 @@
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
       var debug = 1;
-      var debug_html = "";
+      var debug_html = '';
       google.load('visualization', '1', { 'packages': ['map'] });
       google.setOnLoadCallback(drawMap);
       
@@ -41,8 +41,8 @@
         var prefs = new gadgets.Prefs();
         
         // Use this URL: https://docs.google.com/spreadsheets/d/1TyznJnhk1lDg8msI8oQzSrY8oZpySyh6kCmnlQMGuAc/gviz/tq?range=A1:C1000&gid=0&headers=1
-        var query = new google.visualization.Query(prefs.getString("_table_query_url"), {sendMethod: 'auto'});
-        query.setRefreshInterval(Number(prefs.getString("_table_query_refresh_interval")));
+        var query = new google.visualization.Query(prefs.getString('_table_query_url'), {sendMethod: 'auto'});
+        query.setRefreshInterval(Number(prefs.getString('_table_query_refresh_interval')));
         query.send(handleQueryResponse);
       }
       
@@ -59,7 +59,7 @@
           enableScrollWheel: true,
           showTip: true,
           showLine: true,
-          mapType: normal,
+          mapType: 'normal',
           useMapTypeControl: true
           };
         
@@ -71,7 +71,7 @@
         if (debug) {
           debug_html += msg;
           // Write debug HTML to div
-          document.getElementById("debug_div").innerHTML = debug_html;
+          document.getElementById('debug_div').innerHTML = debug_html;
         }
       }
     </script>
