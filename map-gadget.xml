@@ -54,6 +54,14 @@
       
         var data = response.getDataTable();
         var map = new google.visualization.Map(document.getElementById('chart_div'));
+        var options = {
+          enableScrollWheel: true,
+          showTip: true,
+          showLine: true,
+          mapType: normal,
+          useMapTypeControl: true
+          }
+        };
         map.draw(data, { showTip: true });
         gadgets.window.adjustHeight();
       }
