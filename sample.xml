@@ -1,67 +1,52 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Module>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dynamic Maps Engine Layer</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization"></script>
+    <script>
+function initialize() {
 
-  <ModulePrefs
-        title="sample-gadget"
-        height="700"
-        scaling="false" />
-  <Require feature="dynamic-height"/>
-  <UserPref name="_table_query_url"
-        display_name="Data source url"
-        required="true"/>
-  
-  <UserPref name="_table_query_refresh_interval"
-        display_name="Data refresh interval (minutes)"
-    default_value="0"
-        datatype="enum"
-        required="false">
-    <EnumValue value="0"
-          display_value="Do not refresh"/>
-    <EnumValue value="60"
-          display_value="1"/>
-    <EnumValue value="300"
-          display_value="5"/>
-    <EnumValue value="1800"
-          display_value="30"/>
-  </UserPref>
+  var fillArray = ['red', 'blue', 'yellow', 'green'];
 
-  <Content type="html">
-  <![CDATA[
-    <html>
-      <head>
-        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <script type="text/javascript">
-          google.load("visualization", "1", {packages:["map"]});
-          google.setOnLoadCallback(drawChart);
-          function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-              ['Lat', 'Long', 'Name'],
-              [37.4232, -122.0853, 'Work'],
-              [37.4289, -122.1697, 'University'],
-              [37.6153, -122.3900, 'Airport'],
-              [37.4422, -122.1731, 'Shopping']
-            ]);
-    
-            var options = {
-              icons: {
-                default: {
-                  normal: '',
-                  selected: ''
-                }
-              }
-            };
-    
-            var map = new google.visualization.Map(document.getElementById('map_markers_div'));
-            map.draw(data, options);
-          }
-    
-        </script>
-      </head>
-    
-      <body>
-        <div id="map_markers_div" style="width: 400px; height: 300px"></div>
-      </body>
-    </html>
-  ]]>
-  </Content>
-</Module>
+  var mapOptions = {
+    zoom: 14,
+    center: new google.maps.LatLng(59.322506, 18.010025)
+  };
+
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+    mapOptions);
+
+  var layer = new google.maps.visualization.DynamicMapsEngineLayer({
+    layerId: '06673056454046135537-08896501997766553811',
+    map: map,
+    suppressInfoWindows: true,
+    clickable: true
+  });
+
+  google.maps.event.addListener(layer, 'mouseover', function(event) {
+    var style = layer.getFeatureStyle(event.featureId);
+    style.fillColor = fillArray[event.featureId - 1];
+    style.fillOpacity = '0.8';
+  });
+
+  google.maps.event.addListener(layer, 'mouseout', function(event) {
+    var style = layer.getFeatureStyle(event.featureId).resetAll();
+  });
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>
