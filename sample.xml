@@ -28,7 +28,6 @@
   <Content type="html">
   <![CDATA[
   <div id="map-canvas"></div>
-    <title>Dynamic Maps Engine Layer</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
@@ -43,7 +42,7 @@
       function initialize() {
         
         var mapOptions = {
-          zoom: 14,
+          zoom: 12,
           center: new google.maps.LatLng(35.32783678, -80.86272711)
         };
         
