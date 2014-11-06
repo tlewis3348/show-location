@@ -39,7 +39,34 @@
     </style>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization"></script>
     <script type="text/javascript">
+      function addMarker(lat, lng, info) {
+        var pt = new google.maps.LatLng(lat, lng);
+        bounds.extend(pt);
+        var marker = new google.maps.Marker({
+            position: pt,
+            icon: icon,
+            map: map
+        });
+        var popup = new google.maps.InfoWindow({
+            content: info,
+            maxWidth: 300
+        });
+        google.maps.event.addListener(marker, "click", function() {
+            if (currentPopup != null) {
+                currentPopup.close();
+                currentPopup = null;
+            }
+            popup.open(map, marker);
+            currentPopup = popup;
+        });
+        google.maps.event.addListener(popup, "closeclick", function() {
+            map.panTo(center);
+            currentPopup = null;
+        });
+      }
+      
       function initialize() {
+        //var bounds = new google.maps.LatLngBounds();
         
         var mapOptions = {
           zoom: 16,
@@ -54,6 +81,9 @@
           suppressInfoWindows: false,
           clickable: true
         });
+        
+        addMarker(35.32783678, -80.86272711,'New Road');
+        map.fitBounds(google.maps.LatLngBounds());
       }
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
