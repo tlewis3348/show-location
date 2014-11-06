@@ -42,13 +42,7 @@
     <script type="text/javascript">
       function initialize() {
 
-        var mapOptions = {
-          zoom: 14,
-          center: new google.maps.LatLng(59.322506, 18.010025)
-        };
-
-        var map = new google.maps.Map(document.getElementById('map-canvas'),
-          mapOptions);
+        var map = new google.maps.Map(document.getElementById('map-canvas'), {});
 
         var layer = new google.maps.visualization.DynamicMapsEngineLayer({
           layerId: '11689989258151602055-16133476562581908850',
