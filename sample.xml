@@ -46,7 +46,7 @@
           center: new google.maps.LatLng(35.32783678, -80.86272711)
         };
         
-        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);// {});
+        var map = new google.visualization.Map(document.getElementById('map-canvas'));//new google.maps.Map(document.getElementById('map-canvas'), mapOptions);// {});
 
         var layer = new google.maps.visualization.DynamicMapsEngineLayer({
           layerId: '11689989258151602055-16133476562581908850',
