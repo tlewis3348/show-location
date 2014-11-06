@@ -52,7 +52,7 @@
         var layer = new google.maps.visualization.DynamicMapsEngineLayer({
           layerId: '11689989258151602055-16133476562581908850',
           map: map,
-          suppressInfoWindows: true,
+          suppressInfoWindows: false,
           clickable: true
         });
       }
