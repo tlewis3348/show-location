@@ -38,6 +38,7 @@
       }
     </style>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
       function initialize() {
         var query = new google.visualization.Query(prefs.getString('_table_query_url'), {sendMethod: 'auto'});
