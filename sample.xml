@@ -27,6 +27,7 @@
 
   <Content type="html">
   <![CDATA[
+  <div id="debug_div" style="font-size:9pt; padding:5px; color: red;"></div>
   <div id="map-canvas"></div>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
@@ -37,8 +38,6 @@
         padding: 0px
       }
     </style>
-    
-    <div id="debug_div" style="font-size:9pt; padding:5px; color: red;"></div>
     
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
