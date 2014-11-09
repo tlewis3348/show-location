@@ -40,11 +40,17 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization"></script>
     <script type="text/javascript">
       function initialize() {
-        //var bounds = new google.maps.LatLngBounds();
+        var query = new google.visualization.Query(prefs.getString('_table_query_url'), {sendMethod: 'auto'});
+        query.setRefreshInterval(Number(prefs.getString('_table_query_refresh_interval')));
+        query.send(handleQueryResponse);
+      }
+      
+      function handleQueryResponse(response) {
+        var data = response.getDataTable();
         
         var mapOptions = {
           zoom: 16,
-          center: new google.maps.LatLng(35.32783678, -80.86272711)
+          center: new google.maps.LatLng(data[2][1], data[2][2])
         };
         
         var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -55,6 +61,17 @@
           suppressInfoWindows: false,
           clickable: true
         });
+        
+        var options = {
+          enableScrollWheel: true,
+          showTip: true,
+          showLine: true,
+          lineWidth: 5,
+          mapType: 'normal',
+          useMapTypeControl: true
+          };
+        
+        map.draw(data, options);
         
         map.fitBounds(google.maps.LatLngBounds());
       }
