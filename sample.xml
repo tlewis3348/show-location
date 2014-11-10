@@ -83,8 +83,8 @@
           };
         
         //map.draw(data, options);
-        
-        map.fitBounds(google.maps.LatLngBounds());
+        var bounds = new google.maps.LatLngBounds();
+        map.fitBounds(bounds);
       }
       
       google.maps.event.addDomListener(window, 'load', initialize);
