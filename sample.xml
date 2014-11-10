@@ -59,7 +59,7 @@
       function handleQueryResponse(response) {
         var data = response.getDataTable();
         
-        document.getElementById('debug_div').innerHTML = data.getNumberOfRows();
+        document.getElementById('debug_div').innerHTML = data.getNumberOfRows().toString();
         var mapOptions = {
           zoom: 16,
           center: new google.maps.LatLng(data.getValue(data.getNumberOfRows(), 0), data.getValue(data.getNumberOfRows(), 1))
