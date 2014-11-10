@@ -86,7 +86,7 @@
                             };
         
         var layer = new google.maps.visualization.DynamicMapsEngineLayer({
-          layerId: LayerNames2ID[data.getValue(2, 3)],
+          layerId: LayerNames2ID[data.getValue(0, 3)],
           map: map,
           suppressInfoWindows: false,
           clickable: true
