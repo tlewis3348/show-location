@@ -59,7 +59,6 @@
       function handleQueryResponse(response) {
         var data = response.getDataTable();
         
-        //document.getElementById('debug_div').innerHTML = data.getNumberOfRows().toString();
         var mapOptions = {
           zoom: 16,
           center: new google.maps.LatLng(data.getValue(data.getNumberOfRows() - 1, 0), data.getValue(data.getNumberOfRows() - 1, 1))
@@ -84,6 +83,7 @@
                               '13.1 Mile Race': '11689989258151602055-15363260755447510668'
                             };
         
+        document.getElementById('debug_div').innerHTML = data.getValue(0, 3) + ':' + LayerNames2ID[data.getValue(0, 3)];
         var layer = new google.maps.visualization.DynamicMapsEngineLayer({
           layerId: LayerNames2ID[data.getValue(0, 3)],
           map: map,
