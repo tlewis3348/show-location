@@ -106,7 +106,7 @@
         
         data.removeColumns(3, 1)
         //map.draw(data, options);
-        map.fitBounds(google.maps.LatLngBounds());
+        //map.fitBounds(google.maps.LatLngBounds());
       }
       
       google.maps.event.addDomListener(window, 'load', initialize);
