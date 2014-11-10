@@ -87,6 +87,8 @@
         map.fitBounds(google.maps.LatLngBounds());
       }
       
+      google.maps.event.addDomListener(window, 'load', initialize);
+      
       function print(msg) {      
         if (debug) {
           debug_html += msg;
@@ -94,8 +96,6 @@
           document.getElementById('debug_div').innerHTML = debug_html;
         }
       }
-      
-      google.maps.event.addDomListener(window, 'load', initialize);
     </script>
   ]]>
   </Content>
