@@ -57,6 +57,11 @@
       }
       
       function handleQueryResponse(response) {
+        if (response.isError()) {
+          alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+          return;
+        }
+        
         var data = response.getDataTable();
         
         var mapOptions = {
@@ -101,7 +106,8 @@
           useMapTypeControl: true
           };
         
-        //map.draw(data, options);
+        data.removeColumns(3, 1)
+        map.draw(data, options);
         //map.fitBounds(google.maps.LatLngBounds());
       }
       
