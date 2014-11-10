@@ -62,7 +62,7 @@
         document.getElementById('debug_div').innerHTML = data.getNumberOfRows().toString();
         var mapOptions = {
           zoom: 16,
-          center: new google.maps.LatLng(data.getValue(data.getNumberOfRows(), 0), data.getValue(data.getNumberOfRows(), 1))
+          center: new google.maps.LatLng(data.getValue(data.getNumberOfRows() - 1, 0), data.getValue(data.getNumberOfRows() - 1, 1))
         };
         
         var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
