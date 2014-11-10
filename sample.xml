@@ -84,7 +84,7 @@
                               'Trip Home':      '11689989258151602055-02766294797946426855'
                             };
         
-        document.getElementById('debug_div').innerHTML = data.getValue(0, 3) + ':' + LayerNames2ID[data.getValue(0, 3)];
+        //document.getElementById('debug_div').innerHTML = data.getValue(0, 3) + ':' + LayerNames2ID[data.getValue(0, 3)];
         var layer = new google.maps.visualization.DynamicMapsEngineLayer({
           layerId: LayerNames2ID[data.getValue(0, 3)],
           map: map,
@@ -102,7 +102,7 @@
           };
         
         //map.draw(data, options);
-        map.fitBounds(google.maps.LatLngBounds());
+        //map.fitBounds(google.maps.LatLngBounds());
       }
       
       google.maps.event.addDomListener(window, 'load', initialize);
