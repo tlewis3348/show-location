@@ -101,7 +101,7 @@
           useMapTypeControl: true
           };
         
-        //map.draw(data, options);
+        map.draw(data, options);
         //map.fitBounds(google.maps.LatLngBounds());
       }
       
