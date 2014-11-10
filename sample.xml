@@ -61,13 +61,31 @@
         
         var mapOptions = {
           zoom: 16,
-          center: new google.maps.LatLng(35.32778919, -80.86271464)
+          center: new google.maps.LatLng(data.getValue(data.getNumberOfRows(), 0), data.getValue(data.getNumberOfRows(), 1))
         };
         
         var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
+        var LayerNames2ID = new google.visualization.DataTable();
+        var LayerNames2ID = {
+                              '1 Mile Loop':    '11689989258151602055-16133476562581908850',
+                              '2 Mile Loop':    '11689989258151602055-16133476562581908850',
+                              '3 Mile Loop':    '11689989258151602055-16133476562581908850',
+                              '4 Mile O&B':     '11689989258151602055-16133476562581908850',
+                              '5 Mile O&B':     '11689989258151602055-16133476562581908850',
+                              '6 Mile Loop':    '11689989258151602055-16133476562581908850',
+                              '7 Mile Loop':    '11689989258151602055-16133476562581908850',
+                              '8 Mile Loop':    '11689989258151602055-16133476562581908850',
+                              '9 Mile Loop':    '11689989258151602055-16133476562581908850',
+                              '10 Mile Loop':   '11689989258151602055-16133476562581908850',
+                              '11 Mile Loop':   '11689989258151602055-16133476562581908850',
+                              '12 Mile Loop':   '11689989258151602055-16133476562581908850',
+                              '13.1 Mile Loop': '11689989258151602055-16133476562581908850',
+                              '13.1 Mile Race': '11689989258151602055-16133476562581908850'
+                            };
+        
         var layer = new google.maps.visualization.DynamicMapsEngineLayer({
-          layerId: '11689989258151602055-16133476562581908850',
+          layerId: LayerNames2ID[data.getValue(2, 3)],
           map: map,
           suppressInfoWindows: false,
           clickable: true
@@ -83,7 +101,7 @@
           };
         
         //map.draw(data, options);
-        map.fitBounds(google.maps.LatLngBounds());
+        //map.fitBounds(google.maps.LatLngBounds());
       }
       
       google.maps.event.addDomListener(window, 'load', initialize);
