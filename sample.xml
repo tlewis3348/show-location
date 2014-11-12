@@ -105,11 +105,91 @@
                       };
         
         data.removeColumns(3, 1)
-        //map.draw(data, options);
         //map.fitBounds(google.maps.LatLngBounds());
+        
+        var location = [{
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [
+              data.getValue(data.getNumberOfRows() - 1, 0), data.getValue(data.getNumberOfRows() - 1, 1)
+            ]
+          },
+          properties: {
+            Note: data.getValue(data.getNumberOfRows() - 1, 2)
+          }
+        }];
+        
+        doRequest({
+          path: '/mapsengine/v1/tables/11689989258151602055-01342472542092831463/features/batchInsert',
+          method: 'POST',
+          body: {
+            features: location
+          },
+          processResponse: function(response) {
+            $('#insert-table-features-response').text(
+                JSON.stringify(response, null, 2));
+          },
+          processErrorResponse: function(response) {
+            $('#insert-table-features-response').text('Error response:\n\n' +
+                JSON.stringify(response, null, 2));
+          }
+        });
       }
       
       google.maps.event.addDomListener(window, 'load', initialize);
+      
+      // Batch Insert features into table from user created points. This sample
+      // requires that a vector table has been created with a schema that matches
+      // the above sample code. The tableId parameter is the id of the table, and
+      // this function will populate with the above data.
+      // This sample requires that you first configure and authorise gapi.js.
+      function insertTableFeatures(tableId) {
+        
+      }
+      
+      // Utility function to handle retry logic.
+      function doRequest(args) {
+        var retryAttempt = 0;
+      
+        // The following construct is an immediately executed inline function to
+        // enable retrying requests when we encounter rate limiting. It captures
+        // the request arguments to doRequest.
+        (function doRequestWithBackoff() {
+          gapi.client.request({
+            path: args.path,
+            method: args.method,
+            body: args.body,
+            params: args.params
+          }).then(function(response) {
+            args.processResponse(response);
+          }, function(failureResponse) {
+            if (failureResponse.status == 503 ||
+                (failureResponse.result &&
+                    failureResponse.result.error &&
+                    (failureResponse.result.error.errors[0].reason ==
+                        'rateLimitExceeded' ||
+                        failureResponse.result.error.errors[0].reason ==
+                        'userRateLimitExceeded'))) {
+              if (++retryAttempt > 10) {
+                return;
+              }
+      
+              // Exponential back off, with jitter, ramping up to 20 seconds
+              // between retries.
+              var backoffSeconds = Math.random() *
+                  Math.min(Math.pow(2, retryAttempt), 20);
+              window.setTimeout(doRequestWithBackoff, backoffSeconds * 1000);
+      
+              return;
+            }
+      
+            if (args.processErrorResponse) {
+              args.processErrorResponse(failureResponse);
+            }
+          });
+        })();
+      }
       
       function print(msg) {      
         if (debug) {
