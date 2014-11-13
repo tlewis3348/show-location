@@ -27,178 +27,31 @@
 
   <Content type="html">
   <![CDATA[
-  <div id="debug_div" style="font-size:9pt; padding:5px; color: red;"></div>
-  <div id="map-canvas"></div>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <style>
-      html, body, #map-canvas {
-        height: 100%;
-        margin: 0px;
-        padding: 0px
-      }
-    </style>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    function initialize() {
+      var prefs = new gadgets.Prefs();
+      
+      // Use this URL: https://docs.google.com/spreadsheets/d/1TyznJnhk1lDg8msI8oQzSrY8oZpySyh6kCmnlQMGuAc/gviz/tq?range=A1:D1000
+      var query = new google.visualization.Query(prefs.getString('https://docs.google.com/spreadsheets/d/1TyznJnhk1lDg8msI8oQzSrY8oZpySyh6kCmnlQMGuAc/gviz/tq?range=A1:D1000'),
+                                                                 {sendMethod: 'auto'});
+      query.setRefreshInterval(60);
+      query.send(handleQueryResponse);
+    }
     
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization"></script>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-      var debug = 1;
-      var debug_html = '';
-      google.load('visualization', '1', { 'packages': ['map'] });
-      google.setOnLoadCallback(initialize);
+    function handleQueryResponse(response) {
+      var data = response.getDataTable();
+      var route = data.getValue(data.getNumberOfRows() - 1, 3)
+      var route = "https://mapsengine.google.com/11689989258151602055-17772055697785505571-4/mapview/?authuser=0"
+    }
+  </script>
+  <img src="https://www.google.com/chart?chc=sites&amp;cht=d&amp;chdp=sites&amp;chl=%5B%5BGoogle+Gadget'%3D20'f%5Cv'a%5C%3D0'10'%3D499'0'dim'%5Cbox1'b%5CF6F6F6'fC%5CF6F6F6'eC%5C0'sk'%5C%5B%22Include+gadget+(iframe)%22'%5D'a%5CV%5C%3D12'f%5C%5DV%5Cta%5C%3D10'%3D0'%3D500'%3D797'dim'%5C%3D10'%3D10'%3D500'%3D797'vdim'%5Cbox1'b%5Cva%5CF6F6F6'fC%5CC8C8C8'eC%5C'a%5C%5Do%5CLauto'f%5C&amp;sig=LIupg-AjxUbah_DqtRj3JecPeDg" data-igsrc="http://158.gmodules.com/ig/ifr?mid=158&amp;synd=trogedit&amp;url=http%3A%2F%2Fhosting.gmodules.com%2Fig%2Fgadgets%2Ffile%2F106581606564100174314%2Fiframe.xml&amp;up_iframeURL=https%3A%2F%2Fmapsengine.google.com%2F11689989258151602055-17772055697785505571-4%2Fmapview%2F%3Fauthuser%3D0&amp;up_scroll=no&amp;h=800&amp;w=100%25" data-type="ggs-gadget" data-props="align:center;borderTitle:Include gadget (iframe);height:800;igsrc:http#58//158.gmodules.com/ig/ifr?mid=158&amp;synd=trogedit&amp;url=http%3A%2F%2Fhosting.gmodules.com%2Fig%2Fgadgets%2Ffile%2F106581606564100174314%2Fiframe.xml&amp;up_iframeURL=https%3A%2F%2Fmapsengine.google.com%2F11689989258151602055-17772055697785505571-4%2Fmapview%2F%3Fauthuser%3D0&amp;up_scroll=no&amp;h=800&amp;w=100%25;mid:158;scrolling:no;showBorder:true;showBorderTitle:null;spec:http#58//hosting.gmodules.com/ig/gadgets/file/106581606564100174314/iframe.xml;up_iframeURL:" + route + ";up_scroll:no;view:canvas;width:100%;wrap:false;" width="500" height="800" style="display:block;margin:5px auto;text-align:center;" class="igm">
+  <div></div>
+    
+    
       
-      function initialize() {
-        var prefs = new gadgets.Prefs();
-        
-        // Use this URL: https://docs.google.com/spreadsheets/d/1TyznJnhk1lDg8msI8oQzSrY8oZpySyh6kCmnlQMGuAc/gviz/tq?range=A1:D1000
-        var query = new google.visualization.Query(prefs.getString('_table_query_url'), {sendMethod: 'auto'});
-        query.setRefreshInterval(Number(prefs.getString('_table_query_refresh_interval')));
-        query.send(handleQueryResponse);
-      }
-      
-      function handleQueryResponse(response) {
-        if (response.isError()) {
-          alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-          return;
-        }
-        
-        var data = response.getDataTable();
-        
-        var mapOptions = {
-                          zoom: 16,
-                          center: new google.maps.LatLng(data.getValue(data.getNumberOfRows() - 1, 0),
-                                                         data.getValue(data.getNumberOfRows() - 1, 1))
-                         };
-        
-        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  <div></div>
 
-        var LayerNames2ID = {
-                              '1 Mile Loop':    '11689989258151602055-16133476562581908850',
-                              '2 Mile Loop':    '11689989258151602055-12421761926155747447',
-                              '3 Mile Loop':    '11689989258151602055-13496919088645259843',
-                              '4 Mile O&B':     '11689989258151602055-06793893466375912303',
-                              '5 Mile O&B':     '11689989258151602055-04996796288385000359',
-                              '6 Mile Loop':    '11689989258151602055-13933004153574033452',
-                              '7 Mile Loop':    '11689989258151602055-04321643559861420246',
-                              '8 Mile Loop':    '11689989258151602055-12113912950916481117',
-                              '9 Mile Loop':    '11689989258151602055-10203767773364605611',
-                              '10 Mile Loop':   '11689989258151602055-12921502713420913455',
-                              '11 Mile Loop':   '11689989258151602055-14495543923251622067',
-                              '12 Mile Loop':   '11689989258151602055-17234028967417318364',
-                              '13.1 Mile Loop': '11689989258151602055-12847023993615557481',
-                              '13.1 Mile Race': '11689989258151602055-15363260755447510668',
-                              'Trip Home':      '11689989258151602055-02766294797946426855'
-                            };
-        
-        var layer = new google.maps.visualization.MapsEngineLayer({
-          layerId: LayerNames2ID[data.getValue(0, 3)],
-          map: map
-        });
-        
-        var options = {
-                       enableScrollWheel: true,
-                       showTip: true,
-                       showLine: true,
-                       lineWidth: 5,
-                       mapType: 'normal',
-                       useMapTypeControl: true
-                      };
-        
-        data.removeColumns(3, 1)
-        //map.fitBounds(google.maps.LatLngBounds());
-        
-        var location = [{
-          type: 'Feature',
-          geometry: {
-            type: 'Point',
-            coordinates: [
-              data.getValue(data.getNumberOfRows() - 1, 0), data.getValue(data.getNumberOfRows() - 1, 1)
-            ]
-          },
-          properties: {
-            Note: data.getValue(data.getNumberOfRows() - 1, 2)
-          }
-        }];
-        
-        doRequest({
-          path: '/mapsengine/v1/tables/11689989258151602055-01342472542092831463/features/batchInsert',
-          method: 'POST',
-          body: {
-            features: location
-          },
-          processResponse: function(response) {
-            $('#insert-table-features-response').text(
-                JSON.stringify(response, null, 2));
-          },
-          processErrorResponse: function(response) {
-            $('#insert-table-features-response').text('Error response:\n\n' +
-                JSON.stringify(response, null, 2));
-          }
-        });
-      }
-      
-      google.maps.event.addDomListener(window, 'load', initialize);
-      
-      // Batch Insert features into table from user created points. This sample
-      // requires that a vector table has been created with a schema that matches
-      // the above sample code. The tableId parameter is the id of the table, and
-      // this function will populate with the above data.
-      // This sample requires that you first configure and authorise gapi.js.
-      function insertTableFeatures(tableId) {
-        
-      }
-      
-      // Utility function to handle retry logic.
-      function doRequest(args) {
-        var retryAttempt = 0;
-      
-        // The following construct is an immediately executed inline function to
-        // enable retrying requests when we encounter rate limiting. It captures
-        // the request arguments to doRequest.
-        (function doRequestWithBackoff() {
-          gapi.client.request({
-            path: args.path,
-            method: args.method,
-            body: args.body,
-            params: args.params
-          }).then(function(response) {
-            args.processResponse(response);
-          }, function(failureResponse) {
-            if (failureResponse.status == 503 ||
-                (failureResponse.result &&
-                    failureResponse.result.error &&
-                    (failureResponse.result.error.errors[0].reason ==
-                        'rateLimitExceeded' ||
-                        failureResponse.result.error.errors[0].reason ==
-                        'userRateLimitExceeded'))) {
-              if (++retryAttempt > 10) {
-                return;
-              }
-      
-              // Exponential back off, with jitter, ramping up to 20 seconds
-              // between retries.
-              var backoffSeconds = Math.random() *
-                  Math.min(Math.pow(2, retryAttempt), 20);
-              window.setTimeout(doRequestWithBackoff, backoffSeconds * 1000);
-      
-              return;
-            }
-      
-            if (args.processErrorResponse) {
-              args.processErrorResponse(failureResponse);
-            }
-          });
-        })();
-      }
-      
-      function print(msg) {      
-        if (debug) {
-          debug_html += msg;
-          // Write debug HTML to div
-          document.getElementById('debug_div').innerHTML = debug_html;
-        }
-      }
-    </script>
   ]]>
   </Content>
 </Module>
