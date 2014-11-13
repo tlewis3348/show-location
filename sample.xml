@@ -45,7 +45,7 @@
       var route = "https://mapsengine.google.com/11689989258151602055-17772055697785505571-4/mapview/?authuser=0"
     }
   </script>
-  <ifrmae src=route></iframe>
+  <iframe src=route></iframe>
   ]]>
   </Content>
 </Module>
