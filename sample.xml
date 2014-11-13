@@ -27,9 +27,10 @@
 
   <Content type="html">
   <![CDATA[
+  <iframe src=""></iframe>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <script type="text/javascript">
-    function initialize() {
+    document.getElementsByTagName('iframe')[0].onload = function() {
       var prefs = new gadgets.Prefs();
       
       // Use this URL: https://docs.google.com/spreadsheets/d/1TyznJnhk1lDg8msI8oQzSrY8oZpySyh6kCmnlQMGuAc/gviz/tq?range=A1:D1000
@@ -41,11 +42,11 @@
     
     function handleQueryResponse(response) {
       var data = response.getDataTable();
-      var route = data.getValue(data.getNumberOfRows() - 1, 3)
-      var route = "https://mapsengine.google.com/11689989258151602055-17772055697785505571-4/mapview/?authuser=0"
+      var route = data.getValue(data.getNumberOfRows() - 1, 3);
+      var route = "https://mapsengine.google.com/11689989258151602055-17772055697785505571-4/mapview/?authuser=0";
+      document.getElementsByTagName('iframe')[0].src = route;
     }
   </script>
-  <iframe src=route></iframe>
   ]]>
   </Content>
 </Module>
