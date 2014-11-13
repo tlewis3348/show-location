@@ -45,13 +45,7 @@
       var route = "https://mapsengine.google.com/11689989258151602055-17772055697785505571-4/mapview/?authuser=0"
     }
   </script>
-  <img src="https://www.google.com/chart?chc=sites&amp;cht=d&amp;chdp=sites&amp;chl=%5B%5BGoogle+Gadget'%3D20'f%5Cv'a%5C%3D0'10'%3D499'0'dim'%5Cbox1'b%5CF6F6F6'fC%5CF6F6F6'eC%5C0'sk'%5C%5B%22Include+gadget+(iframe)%22'%5D'a%5CV%5C%3D12'f%5C%5DV%5Cta%5C%3D10'%3D0'%3D500'%3D797'dim'%5C%3D10'%3D10'%3D500'%3D797'vdim'%5Cbox1'b%5Cva%5CF6F6F6'fC%5CC8C8C8'eC%5C'a%5C%5Do%5CLauto'f%5C&amp;sig=LIupg-AjxUbah_DqtRj3JecPeDg" data-igsrc="http://158.gmodules.com/ig/ifr?mid=158&amp;synd=trogedit&amp;url=http%3A%2F%2Fhosting.gmodules.com%2Fig%2Fgadgets%2Ffile%2F106581606564100174314%2Fiframe.xml&amp;up_iframeURL=https%3A%2F%2Fmapsengine.google.com%2F11689989258151602055-17772055697785505571-4%2Fmapview%2F%3Fauthuser%3D0&amp;up_scroll=no&amp;h=800&amp;w=100%25" data-type="ggs-gadget" data-props="align:center;borderTitle:Include gadget (iframe);height:800;igsrc:http#58//158.gmodules.com/ig/ifr?mid=158&amp;synd=trogedit&amp;url=http%3A%2F%2Fhosting.gmodules.com%2Fig%2Fgadgets%2Ffile%2F106581606564100174314%2Fiframe.xml&amp;up_iframeURL=https%3A%2F%2Fmapsengine.google.com%2F11689989258151602055-17772055697785505571-4%2Fmapview%2F%3Fauthuser%3D0&amp;up_scroll=no&amp;h=800&amp;w=100%25;mid:158;scrolling:no;showBorder:true;showBorderTitle:null;spec:http#58//hosting.gmodules.com/ig/gadgets/file/106581606564100174314/iframe.xml;up_iframeURL:" + route + ";up_scroll:no;view:canvas;width:100%;wrap:false;" width="500" height="800" style="display:block;margin:5px auto;text-align:center;" class="igm">
-  <div></div>
-    
-    
-      
-  <div></div>
-
+  <ifrmae src=route></iframe>
   ]]>
   </Content>
 </Module>
