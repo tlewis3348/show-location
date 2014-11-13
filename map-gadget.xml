@@ -53,7 +53,7 @@
         }
       
         var data = response.getDataTable();
-        data.removeRows(1, data.getNumberOfRows() - 1)
+        data.removeRows(0, data.getNumberOfRows() - 1)
         var map = new google.visualization.Map(document.getElementById('chart_div'));
         
         var options = {
