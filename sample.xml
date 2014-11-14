@@ -79,17 +79,9 @@
         
         gadgets.window.adjustHeight();
         
-        if (gadgets.window) {
-          var viewport = gadgets.window.getViewportDimensions();
-          if (viewport.width) {
-            var width = viewport.width;
-          }
-          if (viewport.height) {
-            var height = viewport.height;
-          }
-        }
-        iframe.setAttribute('width', width + 'px');
-        iframe.setAttribute('height', height + 'px');
+        var viewport = gadgets.window.getViewportDimensions();
+        iframe.setAttribute('width', viewport.width + 'px');
+        iframe.setAttribute('height', viewport.height+ 'px');
       }
       
       function print(msg) {      
