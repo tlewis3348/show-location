@@ -22,7 +22,8 @@
       var debug = true;
       var debug_html = '';
       google.load("visualization", '1', {packages:['corechart']});
-      gadgets.util.registerOnLoadHandler(doRender);
+      google.setOnLoadCallback(doRender);
+      //gadgets.util.registerOnLoadHandler(doRender);
     
       function doRender(){
         // setup variables
