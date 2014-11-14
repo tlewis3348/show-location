@@ -77,7 +77,7 @@
         dest.innerHTML = '';
         dest.appendChild(iframe);
         
-        gadgets.window.adjustHeight();
+        //gadgets.window.adjustHeight();
         
         var viewport = gadgets.window.getViewportDimensions();
         iframe.setAttribute('width', viewport.width + 'px');
