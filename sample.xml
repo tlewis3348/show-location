@@ -19,7 +19,7 @@
     <div id="debug_div" style="font-size:9pt; padding:5px; color: red;"></div>
     <div id='dest'></div>
     <script type="text/javascript">
-      var debug = 1;
+      var debug = true;
       var debug_html = '';
       google.load('visualization', '1');
       gadgets.util.registerOnLoadHandler(doRender);
