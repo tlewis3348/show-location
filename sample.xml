@@ -7,50 +7,79 @@
           height="800" width="600" author="Google">
     <Require feature="dynamic-height"/>
   </ModulePrefs>
-  <UserPref name="iframeURL" display_name="URL to content" required="true"/>
-  <UserPref name="scroll" display_name="Display scrollbar" default_value="auto" datatype="enum">
-    <EnumValue value="auto" display_value="Automatic"/>
-    <EnumValue value="no" display_value="No"/>
-    <EnumValue value="yes" display_value="Yes"/>
+  <UserPref name="sheetURL" display_name="URL to Google Sheet" required="true"/>
+  <UserPref name="sheetINT" display_name="Data refresh interval (minutes)" default_value="0" datatype="enum" required="false">
+    <EnumValue value="0" display_value="Do not refresh"/>
+    <EnumValue value="60" display_value="1"/>
+    <EnumValue value="300" display_value="5"/>
+    <EnumValue value="1800" display_value="30"/>
   </UserPref>
   <Content type="html" view="default,canvas">
   <![CDATA[
     <div id='dest'></div>
     <script type="text/javascript">
-    gadgets.util.registerOnLoadHandler(doRender);
-  
-    function doRender(){
-      // setup variables
-      var prefs = new gadgets.Prefs();
-      var iframeURL = prefs.getString('iframeURL');
-      var scroll = prefs.getString('scroll');
-      var height = 800;
-      var width = 600;
-  
-      if (gadgets.window) {
-        var viewport = gadgets.window.getViewportDimensions();
-        if (viewport.width) {
-          var width = viewport.width;
-        }
-        if (viewport.height) {
-          var height = viewport.height;
-        }
+      google.load('visualization', '1');
+      gadgets.util.registerOnLoadHandler(doRender);
+    
+      function doRender(){
+        // setup variables
+        var prefs = new gadgets.Prefs();
+        var query = new google.visualization.Query(prefs.getString('sheetURL'), {sendMethod: 'auto'});
+        query.setRefreshInterval(Number(prefs.getString('sheetINT')));
+        query.send(handleQueryResponse);
       }
-  
-      var iframe = document.createElement('iframe');
-      iframe.setAttribute('width', width + 'px');
-      iframe.setAttribute('height', height + 'px');
-      iframe.setAttribute('frameborder','no');
-      if(scroll){
-        iframe.setAttribute('scrolling', scroll);
+        
+      function handleQueryResponse(response){
+        var data = response.getDataTable();
+        
+        var LayerNames2ID = {
+                              'None':           'https://mapsengine.google.com/11689989258151602055-12000150354703946093-4/mapview/?authuser=0',
+                              '1 Mile Loop':    'https://mapsengine.google.com/11689989258151602055-17772055697785505571-4/mapview/?authuser=0',
+                              '2 Mile Loop':    'https://mapsengine.google.com/11689989258151602055-16382460135717964770-4/mapview/?authuser=0',
+                              '3 Mile Loop':    'https://mapsengine.google.com/11689989258151602055-10559428504955428209-4/mapview/?authuser=0',
+                              '4 Mile O&B':     'https://mapsengine.google.com/11689989258151602055-00528795335034407612-4/mapview/?authuser=0',
+                              '5 Mile O&B':     'https://mapsengine.google.com/11689989258151602055-02250638340526429730-4/mapview/?authuser=0',
+                              '6 Mile Loop':    'https://mapsengine.google.com/11689989258151602055-10065976550176775288-4/mapview/?authuser=0',
+                              '7 Mile Loop':    'https://mapsengine.google.com/11689989258151602055-15814808351002136958-4/mapview/?authuser=0',
+                              '8 Mile Loop':    'https://mapsengine.google.com/11689989258151602055-05022961771185695622-4/mapview/?authuser=0',
+                              '9 Mile Loop':    'https://mapsengine.google.com/11689989258151602055-11059938081504763055-4/mapview/?authuser=0',
+                              '10 Mile Loop':   'https://mapsengine.google.com/11689989258151602055-15063535589376921925-4/mapview/?authuser=0',
+                              '11 Mile Loop':   'https://mapsengine.google.com/11689989258151602055-16648596607414356603-4/mapview/?authuser=0',
+                              '12 Mile Loop':   'https://mapsengine.google.com/11689989258151602055-00066770394780962938-4/mapview/?authuser=0',
+                              '13.1 Mile Loop': 'https://mapsengine.google.com/11689989258151602055-09837679046872805372-4/mapview/?authuser=0',
+                              '13.1 Mile Race': 'https://mapsengine.google.com/11689989258151602055-05672249879554957785-4/mapview/?authuser=0',
+                              'Trip Home':      'https://mapsengine.google.com/11689989258151602055-07827183864579646751-4/mapview/?authuser=0'
+                            };
+        
+        var iframeURL = LayerNames2ID[data.getValue(0, 3)];
+        var scroll = "no";
+        var height = 800;
+        var width = 600;
+    
+        if (gadgets.window) {
+          var viewport = gadgets.window.getViewportDimensions();
+          if (viewport.width) {
+            var width = viewport.width;
+          }
+          if (viewport.height) {
+            var height = viewport.height;
+          }
+        }
+    
+        var iframe = document.createElement('iframe');
+        iframe.setAttribute('width', width + 'px');
+        iframe.setAttribute('height', height + 'px');
+        iframe.setAttribute('frameborder','no');
+        if(scroll){
+          iframe.setAttribute('scrolling', scroll);
+        }
+        iframe.setAttribute('src', iframeURL);
+    
+        // set the slideshow to the placeholder div
+        var dest = document.getElementById('dest');
+        dest.innerHTML = '';
+        dest.appendChild(iframe);
       }
-      iframe.setAttribute('src', iframeURL);
-  
-      // set the slideshow to the placeholder div
-      var dest = document.getElementById('dest');
-      dest.innerHTML = '';
-      dest.appendChild(iframe);
-    }
     </script>
   ]]>
   </Content>
