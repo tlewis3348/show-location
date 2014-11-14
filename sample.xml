@@ -64,7 +64,9 @@
         var scroll = "no";
         var height = 800;
         var width = 600;
-    
+        
+        gadgets.window.adjustHeight();
+        
         if (gadgets.window) {
           var viewport = gadgets.window.getViewportDimensions();
           if (viewport.width) {
