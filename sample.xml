@@ -24,14 +24,12 @@
       var debug_html = '';
       google.load("visualization", '1', {packages:['corechart']});
       google.setOnLoadCallback(doRender);
-      //gadgets.util.registerOnLoadHandler(doRender);
-    
+      
       function doRender(){
         // setup variables
         var prefs = new gadgets.Prefs();
         var query = new google.visualization.Query(prefs.getString('sheetURL'), {sendMethod: 'auto'});
         query.setRefreshInterval(Number(prefs.getString('sheetINT')));
-        print(prefs.getString('sheetURL') + " -----> " + prefs.getString('sheetINT'));
         query.send(handleQueryResponse);
       }
         
