@@ -79,7 +79,7 @@
         dest.innerHTML = '';
         dest.appendChild(iframe);
         
-        gadgets.window.adjustHeight();
+        //gadgets.window.adjustHeight();
         
         if (gadgets.window) {
           var viewport = gadgets.window.getViewportDimensions();
