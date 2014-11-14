@@ -66,8 +66,6 @@
         var width = 600;
         
         var iframe = document.createElement('iframe');
-        iframe.setAttribute('width', width + 'px');
-        iframe.setAttribute('height', height + 'px');
         iframe.setAttribute('frameborder','no');
         if(scroll){
           iframe.setAttribute('scrolling', scroll);
@@ -90,6 +88,8 @@
             var height = viewport.height;
           }
         }
+        iframe.setAttribute('width', width + 'px');
+        iframe.setAttribute('height', height + 'px');
       }
       
       function print(msg) {      
