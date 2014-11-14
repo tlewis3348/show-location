@@ -1,55 +1,55 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-
-  <ModulePrefs
-        title="map-gadget"
-        height="410"
-        scaling="false" />
-  <Require feature="dynamic-height"/>
-  <UserPref name="_table_query_url"
-        display_name="Data source url"
-        required="true"/>
-  
-  <UserPref name="_table_query_refresh_interval"
-        display_name="Data refresh interval (minutes)"
-    default_value="0"
-        datatype="enum"
-        required="false">
-    <EnumValue value="0"
-          display_value="Do not refresh"/>
-    <EnumValue value="60"
-          display_value="1"/>
-    <EnumValue value="300"
-          display_value="5"/>
-    <EnumValue value="1800"
-          display_value="30"/>
+  <ModulePrefs title="Include gadget (iframe)" title_url="http://sites.google.com/"
+          description="Include another web page in your Google Site"
+          thumbnail="http://www.gstatic.com/sites-gadgets/common/images/sites-icon-gadget-thumb.png"
+          screenshot="http://www.gstatic.com/sites-gadgets/common/images/sites-icon-gadget-ss.png"
+          height="800" width="600" author="Google">
+    <Require feature="dynamic-height"/>
+  </ModulePrefs>
+  <UserPref name="iframeURL" display_name="URL to content" required="true"/>
+  <UserPref name="scroll" display_name="Display scrollbar" default_value="auto" datatype="enum">
+    <EnumValue value="auto" display_value="Automatic"/>
+    <EnumValue value="no" display_value="No"/>
+    <EnumValue value="yes" display_value="Yes"/>
   </UserPref>
-
-  <Content type="html">
-  <![CDATA[
-  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <Content type="html" view="default,canvas">
+  <div id='dest'><img src="http://www.google.com/ig/images/spinner.gif"></div>
   <script type="text/javascript">
-    google.load('visualization', '1', { 'packages': ['map'] });
-    google.setOnLoadCallback(initialize);
-    
-    function initialize() {
-      var prefs = new gadgets.Prefs();
-      
-      // Use this URL: https://docs.google.com/spreadsheets/d/1TyznJnhk1lDg8msI8oQzSrY8oZpySyh6kCmnlQMGuAc/gviz/tq?range=A1:D1000
-      var query = new google.visualization.Query(prefs.getString('https://docs.google.com/spreadsheets/d/1TyznJnhk1lDg8msI8oQzSrY8oZpySyh6kCmnlQMGuAc/gviz/tq?range=A1:D1000'),
-                                                                 {sendMethod: 'auto'});
-      query.setRefreshInterval(60);
-      query.send(handleQueryResponse);
+  gadgets.util.registerOnLoadHandler(doRender);
+
+  function doRender(){
+    // setup variables
+    var prefs = new gadgets.Prefs();
+    var iframeURL = prefs.getString('iframeURL');
+    var scroll = prefs.getString('scroll');
+    var height = 800;
+    var width = 600;
+
+    if (gadgets.window) {
+      var viewport = gadgets.window.getViewportDimensions();
+      if (viewport.width) {
+        var width = viewport.width;
+      }
+      if (viewport.height) {
+        var height = viewport.height;
+      }
     }
-    
-    function handleQueryResponse(response) {
-      var data = response.getDataTable();
-      var route = data.getValue(data.getNumberOfRows() - 1, 3);
-      var route = "https://mapsengine.google.com/11689989258151602055-17772055697785505571-4/mapview/?authuser=0";
-      var ifr = document.createElement('iframe')
-      ifr.src = route
+
+    var iframe = document.createElement('iframe');
+    iframe.setAttribute('width', width + 'px');
+    iframe.setAttribute('height', height + 'px');
+    iframe.setAttribute('frameborder','no');
+    if(scroll){
+      iframe.setAttribute('scrolling', scroll);
     }
+    iframe.setAttribute('src', iframeURL);
+
+    // set the slideshow to the placeholder div
+    var dest = document.getElementById('dest');
+    dest.innerHTML = '';
+    dest.appendChild(iframe);
+  }
   </script>
-  ]]>
   </Content>
 </Module>
