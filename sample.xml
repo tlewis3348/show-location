@@ -77,11 +77,13 @@
         dest.innerHTML = '';
         dest.appendChild(iframe);
         
-        //gadgets.window.adjustHeight();
+        Height = window.innerHeight - 125;
         
         var viewport = gadgets.window.getViewportDimensions();
         iframe.setAttribute('width', viewport.width + 'px');
-        iframe.setAttribute('height', viewport.height+ 'px');
+        iframe.setAttribute('height', Height + 'px');
+        
+        gadgets.window.setHeight();
       }
       
       function print(msg) {      
