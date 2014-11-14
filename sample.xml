@@ -83,7 +83,7 @@
         iframe.setAttribute('width', viewport.width + 'px');
         iframe.setAttribute('height', Height + 'px');
         
-        gadgets.window.setHeight();
+        gadgets.window.adjustHeight();
       }
       
       function print(msg) {      
