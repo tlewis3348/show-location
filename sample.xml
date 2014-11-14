@@ -21,7 +21,7 @@
     <script type="text/javascript">
       var debug = true;
       var debug_html = '';
-      google.load('visualization', '1');
+      //google.load('visualization', '1');
       gadgets.util.registerOnLoadHandler(doRender);
     
       function doRender(){
