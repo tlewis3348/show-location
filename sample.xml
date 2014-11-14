@@ -30,6 +30,7 @@
         var prefs = new gadgets.Prefs();
         var query = new google.visualization.Query(prefs.getString('sheetURL'), {sendMethod: 'auto'});
         query.setRefreshInterval(Number(prefs.getString('sheetINT')));
+        print(prefs.getString('sheetURL') + " -----> " + prefs.getString('sheetINT'));
         query.send(handleQueryResponse);
       }
         
