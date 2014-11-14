@@ -16,7 +16,7 @@
   </UserPref>
   <Content type="html" view="default,canvas">
   <![CDATA[
-    //<div id="debug_div" style="font-size:9pt; padding:5px; color: red;"></div>
+    <!--<div id="debug_div" style="font-size:9pt; padding:5px; color: red;"></div>-->
     <div id='dest'></div>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
