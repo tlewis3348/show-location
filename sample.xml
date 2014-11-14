@@ -77,7 +77,7 @@
         dest.innerHTML = '';
         dest.appendChild(iframe);
         
-        Height = window.innerHeight - 500;
+        Height = window.innerHeight - 300;
         
         var viewport = gadgets.window.getViewportDimensions();
         iframe.setAttribute('width', viewport.width + 'px');
