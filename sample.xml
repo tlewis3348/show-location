@@ -62,8 +62,6 @@
         
         var iframeURL = LayerNames2ID[data.getValue(0, 3)];
         var scroll = "no";
-        var height = 800;
-        var width = 600;
         
         var iframe = document.createElement('iframe');
         iframe.setAttribute('frameborder','no');
