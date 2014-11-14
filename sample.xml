@@ -16,11 +16,11 @@
   </UserPref>
   <Content type="html" view="default,canvas">
   <![CDATA[
-    <div id="debug_div" style="font-size:9pt; padding:5px; color: red;"></div>
+    //<div id="debug_div" style="font-size:9pt; padding:5px; color: red;"></div>
     <div id='dest'></div>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
-      var debug = true;
+      var debug = false;
       var debug_html = '';
       google.load("visualization", '1', {packages:['corechart']});
       google.setOnLoadCallback(doRender);
@@ -34,10 +34,10 @@
       }
         
       function handleQueryResponse(response){
-        if (response.isError()) {
-          alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-          return;
-        }
+        //if (response.isError()) {
+        //  alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+        //  return;
+        //}
         
         var data = response.getDataTable();
         
