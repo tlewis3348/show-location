@@ -54,6 +54,7 @@
       
         var data = response.getDataTable();
         var data = google.visualization.arrayToDataTable([
+          ['Lat', 'Long', 'Name'],
           [data.getNumberOfRows() - 1, 0), data.getNumberOfRows() - 1, 1), data.getNumberOfRows() - 1, 2)]
         ]);
         var map = new google.visualization.Map(document.getElementById('chart_div'));
