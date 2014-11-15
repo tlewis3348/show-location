@@ -69,7 +69,7 @@
           };
         
         map.draw(data, options);
-        gadgets.window.adjustHeight();
+        //gadgets.window.adjustHeight();
       }
       
       function print(msg) {      
