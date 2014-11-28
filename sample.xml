@@ -84,7 +84,7 @@
           properties: {
             Long: data.getValue(data.getNumberOfRows() - 1, 1),
             Lat: data.getValue(data.getNumberOfRows() - 1, 0),
-            Name: data.getValue(data.getNumberOfRows() - 1, 2),
+            Name: data.getValue(1, 2),
             gx_id: '07B3E81AE343D447'
           }
         }];
