@@ -89,6 +89,14 @@
           }
         }];
         
+        var clientId = 'YOUR_CLIENT_ID';
+        var apiKey = 'YOUR_API_KEY';
+        var scopes = 'https://www.googleapis.com/mapsengine/v1/tables';
+        
+        gapi.client.setApiKey(apiKey);
+        window.setTimeout(checkAuth,1);
+        checkAuth();
+        
         doRequest({
           path: '/mapsengine/v1/tables/11689989258151602055-02741780977112259224/features/batchPatch',
           method: 'POST',
