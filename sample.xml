@@ -32,24 +32,6 @@
         query.send(handleQueryResponse);
       }
       
-      function updateTableFeatures(tableId) {
-        doRequest({
-          path: '/mapsengine/v1/tables/' + tableId + '/features/batchPatch',
-          method: 'POST',
-          body: {
-            features: CurrLoc
-          },
-          processResponse: function(response) {
-            $('#update-table-feature-response').text(
-                JSON.stringify(response, null, 2));
-          },
-          processErrorResponse: function(response) {
-            $('#update-table-feature-response').text('Error response:\n\n' +
-                JSON.stringify(response, null, 2));
-          }
-        });
-      }
-      
       function doRequest(args) {
         var retryAttempt = 0;
       
@@ -106,6 +88,22 @@
             gx_id: '07B3E81AE343D447'
           }
         }];
+        
+        doRequest({
+          path: '/mapsengine/v1/tables/11689989258151602055-02741780977112259224/features/batchPatch',
+          method: 'POST',
+          body: {
+            features: CurrLoc
+          },
+          processResponse: function(response) {
+            $('#update-table-feature-response').text(
+                JSON.stringify(response, null, 2));
+          },
+          processErrorResponse: function(response) {
+            $('#update-table-feature-response').text('Error response:\n\n' +
+                JSON.stringify(response, null, 2));
+          }
+        });
         
         var LayerNames2ID = {
                               'None':           'https://mapsengine.google.com/11689989258151602055-12000150354703946093-4/mapview/?authuser=0',
