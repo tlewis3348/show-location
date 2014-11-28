@@ -26,20 +26,86 @@
       google.setOnLoadCallback(doRender);
       
       function doRender(){
-        // setup variables
         var prefs = new gadgets.Prefs();
         var query = new google.visualization.Query(prefs.getString('sheetURL'), {sendMethod: 'auto'});
         query.setRefreshInterval(Number(prefs.getString('sheetINT')));
         query.send(handleQueryResponse);
       }
-        
+      
+      function updateTableFeatures(tableId) {
+        doRequest({
+          path: '/mapsengine/v1/tables/' + tableId + '/features/batchPatch',
+          method: 'POST',
+          body: {
+            features: CurrLoc
+          },
+          processResponse: function(response) {
+            $('#update-table-feature-response').text(
+                JSON.stringify(response, null, 2));
+          },
+          processErrorResponse: function(response) {
+            $('#update-table-feature-response').text('Error response:\n\n' +
+                JSON.stringify(response, null, 2));
+          }
+        });
+      }
+      
+      function doRequest(args) {
+        var retryAttempt = 0;
+      
+        (function doRequestWithBackoff() {
+          gapi.client.request({
+            path: args.path,
+            method: args.method,
+            body: args.body,
+            params: args.params
+          }).then(function(response) {
+            args.processResponse(response);
+          }, function(failureResponse) {
+            if (failureResponse.status == 503 ||
+                (failureResponse.result &&
+                    failureResponse.result.error &&
+                    (failureResponse.result.error.errors[0].reason ==
+                        'rateLimitExceeded' ||
+                        failureResponse.result.error.errors[0].reason ==
+                        'userRateLimitExceeded'))) {
+              if (++retryAttempt > 10) {
+                return;
+              }
+      
+              var backoffSeconds = Math.random() *
+                  Math.min(Math.pow(2, retryAttempt), 20);
+              window.setTimeout(doRequestWithBackoff, backoffSeconds * 1000);
+      
+              return;
+            }
+      
+            if (args.processErrorResponse) {
+              args.processErrorResponse(failureResponse);
+            }
+          });
+        })();
+      }
+      
       function handleQueryResponse(response){
-        //if (response.isError()) {
-        //  alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-        //  return;
-        //}
-        
         var data = response.getDataTable();
+        
+        var CurrLoc = [{
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [
+              data.getValue(data.getNumberOfRows() - 1, 1),
+              data.getValue(data.getNumberOfRows() - 1, 2)
+            ]
+          },
+          properties: {
+            Long: data.getValue(data.getNumberOfRows() - 1, 1),
+            Lat: data.getValue(data.getNumberOfRows() - 1, 0),
+            Name: data.getValue(data.getNumberOfRows() - 1, 2),
+            gx_id: '07B3E81AE343D447'
+          }
+        }];
         
         var LayerNames2ID = {
                               'None':           'https://mapsengine.google.com/11689989258151602055-12000150354703946093-4/mapview/?authuser=0',
@@ -66,7 +132,6 @@
         iframe.setAttribute('frameborder','no');
         iframe.setAttribute('src', iframeURL);
     
-        // set the slideshow to the placeholder div
         var dest = document.getElementById('dest');
         dest.innerHTML = '';
         dest.appendChild(iframe);
@@ -83,7 +148,6 @@
       function print(msg) {      
         if (debug) {
           debug_html += msg;
-          // Write debug HTML to div
           document.getElementById('debug_div').innerHTML = debug_html;
         }
       }
