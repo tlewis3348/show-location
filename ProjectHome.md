@@ -1,0 +1,1 @@
+Chart list of locations from a Google Sheet.
